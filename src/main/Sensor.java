@@ -15,7 +15,7 @@ public class Sensor {
 		return sensorId;
 	}
 
-	public float getTemperature() {
+	public double getTemperature() {
 		return temperature;
 	}
 	

@@ -1,22 +1,21 @@
 package test;
 
-import static org.junit.Assert.*;
-
 import java.util.List;
+
+import main.Sensor;
+import main.SensorAverageTemparature;
+import main.TemperatureAverager;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import main.Sensor;
-import main.TemperatureAverager;
-
 public class TemperatureAveragerTest {
-	private TemperatureAverager avgTemp;
+	private TemperatureAverager averager;
 
 	@Before
 	public void setUp() {
-		avgTemp = new TemperatureAverager();
+		averager = new TemperatureAverager();
 	}
 
 	@Test
@@ -27,30 +26,32 @@ public class TemperatureAveragerTest {
 
 	@Test
 	public void addTemperatureForASensor() {
-		avgTemp.add(new Sensor("ABCD", 20));
-		Assert.assertTrue("ABCD - 20.00".equals(avgTemp.average().get(0).toString()));
+		averager.add(new Sensor("ABCD", 20));
+		Assert.assertTrue("ABCD - 20.00".equals(averager.average().get(0).toString()));
 	}
 	
 	@Test
 	public void addTemperaturesForASensor() {
-		avgTemp.add(new Sensor("ABCD", 20));
-		avgTemp.add(new Sensor("ABCD", 20.1f));
-		Assert.assertTrue("ABCD - 20.05".equals(avgTemp.average().get(0)));
+		averager.add(new Sensor("ABCD", 20));
+		averager.add(new Sensor("ABCD", 20.1f));
+		Assert.assertTrue("ABCD - 20.05".equals(averager.average().get(0).toString()));
 	}
 
 	
-/*	@Test
+	@Test
 	public void addTemperaturesForMultipleSensor() {
-		avgTemp.add(new Sensor("ABCD", 20));
-		avgTemp.add(new Sensor("ABCD", 20.1f));
-		avgTemp.add(new Sensor("ABCD1", 10.1f));
-		avgTemp.add(new Sensor("ABCD2", 10f));
-		avgTemp.add(new Sensor("ABCD1", 20.1f));
-		List<Float> averagesForSensors = avgTemp.average();
+		averager.add(new Sensor("ABCD", 20));
+		averager.add(new Sensor("ABCD", 20.1f));
+		averager.add(new Sensor("ABCD1", 10.1f));
+		averager.add(new Sensor("ABCD2", 10f));
+		averager.add(new Sensor("ABCD1", 20.1f));
+		List<SensorAverageTemparature> averagesForSensors = averager.average();
 		Assert.assertNotNull(averagesForSensors);
 		Assert.assertEquals(3, averagesForSensors.size());
 		
-		//Assert.assertEquals(20.05, averagesForSensors.get(0), 0.01);
+		Assert.assertTrue("ABCD - 20.05".equals(averagesForSensors.get(0).toString()));
+		Assert.assertTrue("ABCD1 - 15.10".equals(averagesForSensors.get(1).toString()));
+		Assert.assertTrue("ABCD2 - 10.00".equals(averagesForSensors.get(2).toString()));
 	}
-*/
+
 }
